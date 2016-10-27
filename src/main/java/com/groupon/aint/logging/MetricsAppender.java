@@ -92,6 +92,7 @@ public abstract class MetricsAppender extends UnsynchronizedAppenderBase<ILoggin
         // Close the existing metrics object and create a new one
         final Lock lock = _lock.writeLock();
         final Metrics metrics;
+        lock.lock();
         try {
             metrics = _atomicMetrics.getAndSet(_metricsFactory.create());
             _empty.set(true);
