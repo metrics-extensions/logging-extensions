@@ -48,6 +48,7 @@ public class ExceptionCounter extends MetricsAppender {
         final String throwableName = throwableProxyImpl.getThrowable().getClass().getSimpleName();
 
         final Lock lock = _lock.readLock();
+        lock.lock();
         try {
             _atomicMetrics.get().incrementCounter(getMetricNamePrefix() + throwableName);
         } finally {

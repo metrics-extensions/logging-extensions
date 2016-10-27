@@ -37,6 +37,7 @@ public class EventLevelCounter extends MetricsAppender {
     @Override
     protected void append(final ILoggingEvent event) {
         final Lock lock = _lock.readLock();
+        lock.lock();
         try {
             _atomicMetrics.get().incrementCounter(getMetricNamePrefix() + event.getLevel().toString());
         } finally {
